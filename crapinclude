@@ -1,0 +1,29 @@
+#!/usr/bin/python
+
+import re
+import sys
+
+
+def resolve_include(input_stream, output_stream):
+    include = re.compile('`([^`]+)`\{.include}')
+    output = ''
+    for line in input_stream:
+        if include.search(line):
+            input_file = include.search(line).groups()[0]
+            included_file = open(input_file, 'r')
+            included_content = resolve_include(included_file, None)
+            line = include.sub(line, included_content)
+        if output_stream is not None:
+            output_stream.write(line)
+        else:
+            output += line
+    return output
+
+
+if __name__ == '__main__':
+    try:
+        resolve_include(sys.stdin, sys.stdout)
+    except RuntimeError as exc:
+        if str(exc).startswith('maximum recursion depth exceeded'):
+            raise RuntimeError('There are cyclic includes in your files!')
+        raise
