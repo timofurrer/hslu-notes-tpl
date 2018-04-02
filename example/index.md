@@ -17,3 +17,7 @@ titlepage-rule-height: 1
 Here is the actual document text...
 
 `included.md`{.include}
+
+`mermaid.md`{.include}
+
+`plantuml.md`{.include}
