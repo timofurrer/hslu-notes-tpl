@@ -1,3 +1,5 @@
+.PHONY: all build build-img update-eisvogel clean-build publish
+
 all: build
 
 build: build-img
@@ -9,6 +11,8 @@ build-img:
 update-eisvogel:
 	wget https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex -O template/eisvogel.tex
 
-
 clean-build:
 	docker build --no-cache . -t timofurrer/hslu-notes
+
+publish: build-img
+	docker push timofurrer/hslu-notes
