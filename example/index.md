@@ -15,3 +15,5 @@ titlepage-rule-height: 1
 ## Hello World
 
 Here is the actual document text...
+
+`included.md`{.include}

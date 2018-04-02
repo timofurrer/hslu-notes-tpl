@@ -1,7 +1,7 @@
 all: build
 
 build: build-img
-	docker run --rm -v $(PWD):/notes timofurrer/hslu-notes
+	docker run --rm -v $(PWD)/example:/notes timofurrer/hslu-notes
 
 build-img:
 	docker build . -t timofurrer/hslu-notes
